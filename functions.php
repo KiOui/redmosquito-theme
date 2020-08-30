@@ -60,3 +60,46 @@ if ( ! function_exists( 'storefront_site_title_or_logo' ) ) {
         echo $html; // WPCS: XSS ok.
     }
 }
+
+if ( ! function_exists( 'storefront_header_container' ) ) {
+    /**
+     * The header container
+     */
+    function storefront_header_container() {
+        echo '<div class="storefront-header-container">';
+    }
+}
+
+if ( ! function_exists( 'storefront_primary_navigation_wrapper' ) ) {
+    /**
+     * The primary navigation wrapper
+     */
+    function storefront_primary_navigation_wrapper() {
+        echo '<div class="storefront-primary-navigation">';
+    }
+}
+
+if ( ! function_exists( 'storefront_primary_navigation_wrapper_close' ) ) {
+    /**
+     * The primary navigation wrapper close
+     */
+    function storefront_primary_navigation_wrapper_close() {
+        echo '</div>';
+    }
+}
+
+function remove_storefront_header_actions() {
+    remove_all_actions("storefront_header");
+    add_action( 'storefront_header', 'storefront_header_container', 0 );
+    add_action( 'storefront_header', 'storefront_skip_links', 5 );
+    add_action( 'storefront_header', 'storefront_site_branding', 20 );
+    add_action( 'storefront_header', 'storefront_secondary_navigation', 30 );
+    add_action( 'storefront_header', 'storefront_header_container_close', 41 );
+    add_action( 'storefront_header', 'storefront_primary_navigation_wrapper', 42 );
+    add_action( 'storefront_header', 'storefront_primary_navigation', 50 );
+    add_action( 'storefront_header', 'storefront_product_search', 51);
+    add_action( 'storefront_header', 'storefront_header_cart', 60);
+    add_action( 'storefront_header', 'storefront_primary_navigation_wrapper_close', 68 );
+}
+
+add_action("storefront_before_header", "remove_storefront_header_actions", 100);

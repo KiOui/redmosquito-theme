@@ -161,7 +161,8 @@ button.menu-toggle {
   background: #212121; }
 
 .storefront-primary-navigation {
-  background-color: transparent; }
+  background-color: transparent;
+}
 
 .posted-on,
 .byline {
@@ -518,3 +519,81 @@ table.cart td.actions {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   content: "\f15c" !important; }
+
+
+/* Edited */
+
+@media screen and (min-width: 800px) {
+  .storefront-primary-navigation {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .site-search {
+    margin-bottom: 0;
+    width: 100px;
+  }
+
+  .site-header-cart {
+    margin-left: 5px;
+    width: auto;
+  }
+
+  #site-navigation {
+    width: auto;
+    flex-grow: 1;
+  }
+
+  .storefront-header-container {
+    margin-bottom: 10px;
+  }
+
+  .site-header .storefront-header-container .site-branding {
+    width: 100%;
+    position: relative;
+    float: none;
+    display: flex;
+  }
+
+  .site-header .col-full .site-branding {
+    width: 100%;
+    position: relative;
+    float: none;
+    display: flex;
+  }
+
+  .site-branding .custom-logo-link {
+    margin-right: auto;
+  }
+
+  .site-branding {
+    margin-bottom: 0;
+  }
+
+  .site-branding .site-branding-container {
+    flex-grow: 0;
+  }
+
+  .site-branding-align-bottom {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .site-branding-align-bottom .site-title {
+    margin-top: auto;
+  }
+}
+
+.site-header {
+  margin-top: 4em;
+}
+
+@media screen and (max-width: 799px) {
+  .site-header {
+    margin-top: 2em;
+    padding: 20px;
+  }
+}
