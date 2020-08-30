@@ -1,2 +1,2 @@
 # redmosquito-theme
-A child theme of Boutique for redmosquito.nl
+A child theme of Boutique (Storefront) for redmosquito.nl
