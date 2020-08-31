@@ -21,6 +21,7 @@ require_once( 'inc/class-boutique.php' );
 require_once( 'inc/class-boutique-customizer.php' );
 require_once( 'inc/class-boutique-template.php' );
 require_once( 'inc/class-boutique-integrations.php' );
+require_once( 'inc/customizer.php' );
 
 /**
  * Do not add custom code / snippets here.
@@ -51,6 +52,15 @@ if ( ! function_exists( 'storefront_site_title_or_logo' ) ) {
         if ( '' !== get_bloginfo( 'description' ) ) {
             $html .= '<p class="site-description">' . esc_html( get_bloginfo( 'description', 'display' ) ) . '</p>';
         }
+
+        if (!empty(get_theme_mod('contact-phone'))) {
+            $html .= '<p class="site-contact">' . get_theme_mod( 'contact-phone' ) . '</p>';
+        }
+
+        if (!empty(get_theme_mod('contact-email'))) {
+            $html .= '<p class="site-contact">' . get_theme_mod( 'contact-email' ) . '</p>';
+        }
+
         $html .= "</div></div>";
 
         if ( ! $echo ) {
@@ -103,3 +113,5 @@ function remove_storefront_header_actions() {
 }
 
 add_action("storefront_before_header", "remove_storefront_header_actions", 100);
+
+new RedmosquitoCustomizer();

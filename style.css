@@ -589,6 +589,8 @@ table.cart td.actions {
 
 .site-header {
   margin-top: 4em;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 799px) {
@@ -596,4 +598,9 @@ table.cart td.actions {
     margin-top: 2em;
     padding: 20px;
   }
+}
+
+.site-contact {
+  margin: 0;
+  font-size: 0.8em;
 }
