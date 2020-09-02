@@ -62,7 +62,7 @@
 
     <div id="content" class="site-content" tabindex="-1">
         <?php
-        if (false) {
+        if (is_front_page()) {
         ?>
             <div class="col-full-homepage col-full">
         <?php
