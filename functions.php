@@ -98,6 +98,20 @@ if ( ! function_exists( 'storefront_primary_navigation_wrapper_close' ) ) {
     }
 }
 
+function boutique_single_auction_button() {
+    global $product;
+    $categories = $product->get_category_ids();
+    $category_names = array();
+    foreach ($categories as $category) {
+        $category_names[] = get_term($category, 'product_cat')->name;
+    }
+    if (in_array("Aftersale", $category_names)) {
+        ?>
+        <a href="https://redmosquito.nl/plaats-bod?auction-item-name=<?php echo str_replace(' ', '+', $product->get_title()); ?>&auction-item-number=<?php echo $product->get_id(); ?>" class="boutique-aftersale-button button product_type_simple">Plaats bod</a>
+        <?php
+    }
+}
+
 function remove_storefront_header_actions() {
     remove_all_actions("storefront_header");
     add_action( 'storefront_header', 'storefront_header_container', 0 );
@@ -113,5 +127,8 @@ function remove_storefront_header_actions() {
 }
 
 add_action("storefront_before_header", "remove_storefront_header_actions", 100);
+
+/* Auction button on product page */
+add_action( 'woocommerce_single_product_summary', 'boutique_single_auction_button', 31 );
 
 new RedmosquitoCustomizer();
