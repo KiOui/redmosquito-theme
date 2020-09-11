@@ -61,17 +61,7 @@
     ?>
 
     <div id="content" class="site-content" tabindex="-1">
-        <?php
-        if (is_front_page()) {
-        ?>
-            <div class="col-full-homepage col-full">
-        <?php
-        } else {
-        ?>
-            <div class="col-full">
-        <?php
-        }
- ?>
+        <div class="col-full">
 
 <?php
 do_action( 'storefront_content_top' );
