@@ -33,7 +33,7 @@ class CustomSlider {
 	    ob_start();
 	    ?>
             <!-- Slider main container -->
-            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/inner-shadow--top.png">
+            <img class="custom-slider-img" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/inner-shadow--top.png">
             <div class="swiper-container">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
@@ -63,7 +63,7 @@ class CustomSlider {
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
-            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/inner-shadow--bottom.png">
+            <img class="custom-slider-img" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/inner-shadow--bottom.png">
         <?php
         $output_string = ob_get_contents();
         ob_end_clean();

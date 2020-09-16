@@ -108,13 +108,9 @@ function boutique_single_auction_button() {
     }
     if (in_array("Aftersale", $category_names)) {
         ?>
-        <a href="https://redmosquito.nl/plaats-bod?auction-item-name=<?php echo str_replace(' ', '+', $product->get_title()); ?>&auction-item-number=<?php echo $product->get_id(); ?>" class="boutique-aftersale-button button product_type_simple">Plaats bod</a>
+        <a href="https://redmosquito.nl/plaats-bod?auction-item-name=<?php echo str_replace(' ', '+', $product->get_title()); ?>&auction-item-number=<?php if (!empty(get_field('product_id', $product->get_id()))) { echo get_field('product_id', $product->get_id()); } else { echo "site_product_id_" . $product->get_id(); } ?>" class="boutique-aftersale-button button product_type_simple">Plaats bod</a>
         <?php
     }
-}
-
-function after_item_title() {
-    the_excerpt();
 }
 
 function add_footer_image() {
@@ -137,6 +133,20 @@ function storefront_credit() {
     echo $html; // WPCS: XSS ok.
 }
 
+function before_item_title() {
+    global $product;
+    $categories = $product->get_category_ids();
+    $category_names = array();
+    foreach ($categories as $category) {
+        $category_names[] = get_term($category, 'product_cat')->name;
+    }
+    if (!in_array("Aftersale", $category_names) && !empty(get_field('product_id', $product->get_id()))) {
+        ?>
+            <div class="product-item-number">Kavel nr. <?php echo get_field('product_id', $product->get_id()); ?></div>
+        <?php
+    }
+}
+
 function remove_storefront_header_actions() {
     remove_all_actions("storefront_header");
     add_action( 'storefront_header', 'storefront_header_container', 0 );
@@ -157,7 +167,7 @@ add_action("storefront_before_header", "remove_storefront_header_actions", 100);
 add_action( 'woocommerce_single_product_summary', 'boutique_single_auction_button', 31 );
 
 /* Text after item title */
-add_action('woocommerce_after_shop_loop_item_title', 'after_item_title', 1);
+add_action('woocommerce_before_shop_loop_item_title', 'before_item_title', 20);
 
 /* Footer image */
 add_action('storefront_footer', 'add_footer_image', 15);

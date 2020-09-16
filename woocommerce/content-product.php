@@ -69,7 +69,7 @@ if ( empty( $product ) || false === wc_get_loop_product_visibility( $product->ge
     }
 	if (in_array("Aftersale", $category_names)) {
 	    ?>
-        <a href="https://redmosquito.nl/plaats-bod?auction-item-name=<?php echo str_replace(' ', '+', $product->get_title()); ?>&auction-item-number=<?php echo $product->get_id(); ?>" class="boutique-aftersale-button button product_type_simple">Plaats bod</a>
+        <a href="https://redmosquito.nl/plaats-bod?auction-item-name=<?php echo str_replace(' ', '+', $product->get_title()); ?>&auction-item-number=<?php if (!empty(get_field('product_id', $product->get_id()))) { echo get_field('product_id', $product->get_id()); } else { echo "site_product_id_" . $product->get_id(); } ?>" class="boutique-aftersale-button button product_type_simple">Plaats bod</a>
         <?php
     }
 	do_action( 'woocommerce_after_shop_loop_item' );
