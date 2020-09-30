@@ -147,6 +147,15 @@ function before_item_title() {
     }
 }
 
+function after_item_title() {
+    global $product;
+    if (!empty(get_field('product_year', $product->get_id()))) {
+        ?>
+            <div class="product-item-year"><?php echo get_field('product_year', $product->get_id()); ?></div>
+        <?php
+    }
+}
+
 function remove_storefront_header_actions() {
     remove_all_actions("storefront_header");
     add_action( 'storefront_header', 'storefront_header_container', 0 );
@@ -161,13 +170,36 @@ function remove_storefront_header_actions() {
     add_action( 'storefront_header', 'storefront_primary_navigation_wrapper_close', 68 );
 }
 
+function pre_get_posts_order_by_product_id( $query ) {
+
+    // do not modify queries in the admin
+    if( is_admin() ) {
+        return $query;
+    }
+
+    if( isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'product' ) {
+        $query->set('orderby', 'meta_value_num');
+        $query->set('meta_key', 'product_id');
+        $query->set('order', 'ASC');
+
+    }
+    // return
+    return $query;
+}
+
+/* Filter all posts on PRODUCT ID */
+add_action('pre_get_posts', 'pre_get_posts_order_by_product_id');
+
 add_action("storefront_before_header", "remove_storefront_header_actions", 100);
 
 /* Auction button on product page */
 add_action( 'woocommerce_single_product_summary', 'boutique_single_auction_button', 31 );
 
-/* Text after item title */
+/* Text before item title */
 add_action('woocommerce_before_shop_loop_item_title', 'before_item_title', 20);
+
+/* Text after item title */
+add_action('woocommerce_after_shop_loop_item_title', 'after_item_title', 20);
 
 /* Footer image */
 add_action('storefront_footer', 'add_footer_image', 15);
