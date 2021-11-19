@@ -1,2 +1,3 @@
-# redmosquito-theme
-A child theme of Boutique (Storefront) for redmosquito.nl
+# Redmosquito Slider
+
+A Slider for [Redmosquito](https://redmosquito.nl).
